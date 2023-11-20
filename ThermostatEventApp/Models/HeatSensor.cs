@@ -37,12 +37,48 @@ namespace ThermostatEventApp.Models
         public void RunHeatSensor()
         {
             Console.WriteLine("Heat sensor is running...");
-            //MonitorTemperature();
+            MonitorTemperature();
         }
 
         private void MonitorTemperature()
         {
-            //need to implement
+            foreach (double temperature in _temperatureData)
+            {
+                Console.ResetColor();
+                Console.WriteLine($"DateTime: {DateTime.Now}, Temperature: {temperature}");
+
+                if (temperature >= _emergencyLevel)
+                {
+                    TemperatureEventArgs e = new TemperatureEventArgs
+                    {
+                        Temperature = temperature,
+                        CurrentDateTime = DateTime.Now
+                    };
+                    OnTemperatureReachesEmergencyLevel(e);
+                }
+                else if (temperature >= _warningLevel)
+                {
+                    _hasReachedWarningTemp = true;
+                    TemperatureEventArgs e = new TemperatureEventArgs
+                    {
+                        Temperature = temperature,
+                        CurrentDateTime = DateTime.Now
+                    };
+                    OnTemperatureReachesWarningLevel(e);
+                }
+                else if (temperature < _warningLevel && _hasReachedWarningTemp)
+                {
+                    _hasReachedWarningTemp = false;
+                    TemperatureEventArgs e = new TemperatureEventArgs
+                    {
+                        Temperature = temperature,
+                        CurrentDateTime = DateTime.Now
+                    };
+                    OnTemperatureFallsBelowWarningLevel(e);
+                }
+
+                Thread.Sleep(1000);
+            }
         }
 
         protected void OnTemperatureReachesWarningLevel(TemperatureEventArgs e)
