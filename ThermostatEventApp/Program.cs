@@ -1,4 +1,6 @@
 ﻿using System;
+using ThermostatEventApp.Interfaces;
+using ThermostatEventApp.Models;
 
 namespace ThermostatEventApp
 {
@@ -9,7 +11,8 @@ namespace ThermostatEventApp
             Console.WriteLine("Press Any Key to start device...");
             Console.ReadKey();
 
-            //run device
+            IDevice device = new Device();
+            device.RunDevice();
 
             Console.ReadKey();
         }

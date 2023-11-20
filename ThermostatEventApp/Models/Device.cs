@@ -19,7 +19,8 @@ namespace ThermostatEventApp.Models
         {
             Console.WriteLine();
             Console.WriteLine("Sending out notifications to emergency services personal...");
-            
+            ShutDownDevice();
+            Console.WriteLine();
         }
 
         private void ShutDownDevice()
