@@ -31,7 +31,7 @@ namespace ThermostatEventApp.Models
         {
             Console.WriteLine("Device is running");
 
-            //ICoolingMechanism coolingMechanism = new CoolingMechanism();
+            ICoolingMechanism coolingMechanism = new CoolingMechanism();
             //IHeatSensor heatSensor = new HeatSensor(Warning_Level, Emergency_Level);
             //IThermostat heatSensor = new HeatSensor(this, heatSensor, coolingMechanism);
 
