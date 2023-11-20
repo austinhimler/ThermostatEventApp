@@ -32,11 +32,10 @@ namespace ThermostatEventApp.Models
             Console.WriteLine("Device is running");
 
             ICoolingMechanism coolingMechanism = new CoolingMechanism();
-            //IHeatSensor heatSensor = new HeatSensor(Warning_Level, Emergency_Level);
-            //IThermostat heatSensor = new HeatSensor(this, heatSensor, coolingMechanism);
+            IHeatSensor heatSensor = new HeatSensor(Warning_Level, Emergency_Level);
+            IThermostat thermostat = new Thermostat(this, heatSensor, coolingMechanism);
 
-            //thermostat.RunThermostat();
-
+            thermostat.RunThermostat();
         }
     }
 }
